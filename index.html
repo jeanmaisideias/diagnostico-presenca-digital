@@ -52,6 +52,22 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
 .hero-photo{object-position:50% 45%}
 @media(max-width:700px){.hero-content .note{font-size:20px}.privacy-details{font-size:24px}.hero-photo{object-position:50% 40%}}
 @media(max-width:360px){.site-footer{font-size:18px}.site-footer .footer-privacy{font-size:20px}}
+
+/* Compact mobile typography and clear next steps. */
+.site-footer,.site-footer .footer-privacy{font-size:12px;line-height:1.6}
+.note,.share-note,#coverage-note{font-size:12px;line-height:1.6}
+.hero-content .note{font-size:12px}
+.privacy-details,.consent-row{font-size:13px;line-height:1.6}.privacy-details h3{font-size:14px}
+.hero-content .btn,#btn-lead{font-size:15px}
+.form-back,#btn-back{background:#f59a38;border-color:#f59a38;color:#281500}
+.form-back:hover,#btn-back:hover{background:#ffb660;border-color:#ffb660;color:#281500}
+.priority-step{display:flex;align-items:flex-start;gap:13px;padding:17px 0;border-bottom:1px solid var(--border)}.priority-step:last-child{border-bottom:0}
+.step-number{flex:none;width:29px;height:29px;display:grid;place-items:center;background:#d3a5ff14;color:var(--roxo-claro);font-size:12px;border-radius:50%;margin-top:1px}
+.priority-step h4{margin:0 0 7px;font-size:15px;font-weight:600;line-height:1.35;color:#fff}.priority-step p{font-size:13px;line-height:1.6;color:#c7bfce;margin:0}
+.gap-list h3{font-size:17px;letter-spacing:-.3px;text-transform:none;color:#fff;margin-bottom:4px;font-weight:500}
+#coverage-note{margin:12px 0 0}
+@media(max-width:700px){.story h1{font-size:30px;line-height:1.12;text-wrap:balance}.headline{font-size:25px}.q-title{font-size:21px}.result-headline{font-size:23px}.site-footer,.site-footer .footer-privacy,.hero-content .note{font-size:12px}.privacy-details,.consent-row{font-size:13px}.hero-content .btn,#btn-lead{font-size:15px}.hero-content{padding:23px 22px}}
+@media(max-width:360px){.story h1{font-size:27px}.hero-content .btn,#btn-lead{font-size:14px}.site-footer,.site-footer .footer-privacy{font-size:12px}}
 </style>
 </head>
 <body data-step="intro">
@@ -78,9 +94,10 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
       <input type="text" id="f-nome" required maxlength="160" autocomplete="given-name" placeholder="Como podemos te chamar">
       <label for="f-empresa">Empresa</label>
       <input type="text" id="f-empresa" required maxlength="160" autocomplete="organization" placeholder="Nome do negócio">
+      <label for="f-segmento">Qual o seu segmento?</label><input type="text" id="f-segmento" required maxlength="80" placeholder="Ex.: comércio, saúde, construção, serviços">
       <label for="f-contato">Site ou Instagram do negócio</label>
       <input type="text" id="f-contato" required maxlength="160" autocapitalize="none" spellcheck="false" placeholder="@seuinstagram ou seusite.com.br">
-      <details class="privacy-details" id="privacy-details"><summary>Como usamos seus dados · LGPD</summary><div class="privacy-content"><h3>Aviso de privacidade do diagnóstico</h3><p><strong>Responsável:</strong> Mais Ideias. Usamos nome, empresa, site ou Instagram informado, respostas e pontuação para gerar o diagnóstico, analisar as necessidades da sua empresa e atender sua solicitação sobre esse resultado.</p><p><strong>Hospedagem e compartilhamento:</strong> o código desta página está hospedado no GitHub. O diagnóstico é calculado no seu navegador; este formulário não envia automaticamente os dados preenchidos a um servidor. Ao escolher o WhatsApp, seus dados, respostas, nota e registro do consentimento serão incluídos em uma mensagem que você poderá revisar antes de enviar à Mais Ideias. O GitHub e o WhatsApp/Meta podem tratar dados técnicos de acesso conforme suas próprias políticas de privacidade.</p><p><strong>Finalidade:</strong> o consentimento abaixo se limita a este diagnóstico e ao contato relacionado a ele. Não inclui autorização para campanhas ou listas de divulgação. Os dados devem ser mantidos apenas pelo tempo necessário a esse atendimento e às obrigações legais aplicáveis.</p><p><strong>Seus direitos:</strong> você pode solicitar acesso, correção, exclusão e revogar o consentimento pelo <a href="https://wa.me/5547988689351?text=Ol%C3%A1%2C%20quero%20tratar%20dos%20meus%20dados%20pessoais%20do%20diagn%C3%B3stico." target="_blank" rel="noopener">WhatsApp da Mais Ideias</a>. A revogação não invalida tratamentos anteriores legítimos; a exclusão observa as hipóteses legais de conservação.</p><p>Este formulário não pede dados sensíveis. Informe apenas dados profissionais necessários ao diagnóstico.</p><p>Versão do aviso: 25/09/2026 · v2.</p></div></details><label class="consent-row" for="f-consent"><input type="checkbox" id="f-consent" required><span>Autorizo a Mais Ideias a tratar os dados informados e minhas respostas para gerar e analisar este diagnóstico e entrar em contato sobre ele, conforme o aviso acima.</span></label><button type="submit" class="btn btn-primary" id="btn-lead">Começar diagnóstico →</button></form><button class="btn btn-ghost form-back" onclick="goTo('intro')">Voltar</button>
+      <details class="privacy-details" id="privacy-details"><summary>Como usamos seus dados · LGPD</summary><div class="privacy-content"><h3>Aviso de privacidade do diagnóstico</h3><p><strong>Responsável:</strong> Mais Ideias. Usamos nome, empresa, segmento, site ou Instagram informado, respostas e pontuação para gerar o diagnóstico, analisar as necessidades da sua empresa e atender sua solicitação sobre esse resultado.</p><p><strong>Hospedagem e compartilhamento:</strong> o código desta página está hospedado no GitHub. O diagnóstico é calculado no seu navegador; este formulário não envia automaticamente os dados preenchidos a um servidor. Ao escolher o WhatsApp, seus dados, nota, principais pontos do diagnóstico e registro do consentimento serão incluídos em uma mensagem que você poderá revisar antes de enviar à Mais Ideias. O GitHub e o WhatsApp/Meta podem tratar dados técnicos de acesso conforme suas próprias políticas de privacidade.</p><p><strong>Finalidade:</strong> o consentimento abaixo se limita a este diagnóstico e ao contato relacionado a ele. Não inclui autorização para campanhas ou listas de divulgação. Os dados devem ser mantidos apenas pelo tempo necessário a esse atendimento e às obrigações legais aplicáveis.</p><p><strong>Seus direitos:</strong> você pode solicitar acesso, correção, exclusão e revogar o consentimento pelo <a href="https://wa.me/5547988689351?text=Ol%C3%A1%2C%20quero%20tratar%20dos%20meus%20dados%20pessoais%20do%20diagn%C3%B3stico." target="_blank" rel="noopener">WhatsApp da Mais Ideias</a>. A revogação não invalida tratamentos anteriores legítimos; a exclusão observa as hipóteses legais de conservação.</p><p>Este formulário não pede dados sensíveis. Informe apenas dados profissionais necessários ao diagnóstico.</p><p>Versão do aviso: 25/09/2026 · v3.</p></div></details><label class="consent-row" for="f-consent"><input type="checkbox" id="f-consent" required><span>Autorizo a Mais Ideias a tratar os dados informados e minhas respostas para gerar e analisar este diagnóstico e entrar em contato sobre ele, conforme o aviso acima.</span></label><button type="submit" class="btn btn-primary" id="btn-lead">Começar diagnóstico →</button></form><button class="btn btn-ghost form-back" onclick="goTo('intro')">Voltar</button>
     </div>
 
     <!-- SCREEN 2: quiz (questions injected by JS) -->
@@ -115,13 +132,13 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
       <div class="result-sub" id="result-sub">—</div>
 
       <div class="gap-list">
-        <h3 id="priorities-title">Suas prioridades de evolução</h3><p class="note" id="coverage-note"></p>
-        <div id="gap-items"></div>
+        <h3 id="priorities-title">Seus próximos passos</h3>
+        <div id="gap-items"></div><p class="note" id="coverage-note"></p>
       </div>
 
       <div class="cta-block">
         <p id="result-cta-copy"></p>
-        <a class="btn btn-lime" id="whatsapp-cta" href="#" target="_blank" rel="noopener">Enviar diagnóstico pelo WhatsApp</a><p class="share-note">A mensagem inclui seus dados, a nota e as 10 respostas. Você pode revisá-la no WhatsApp antes de enviar.</p><p class="note" id="copy-status" role="status" hidden></p>
+        <a class="btn btn-lime" id="whatsapp-cta" href="#" target="_blank" rel="noopener">Enviar diagnóstico pelo WhatsApp</a><p class="share-note">Você envia um resumo com seus dados, a nota e os principais pontos para a conversa.</p><p class="note" id="copy-status" role="status" hidden></p>
       </div>
       <div class="note" id="save-note" role="status"></div><p class="note">Autoavaliação baseada no que você informou, sem auditoria dos canais.<br>A nota não comprova resultados de vendas nem garante desempenho futuro.</p><button class="restart" onclick="currentQ=0;renderQuestion();goTo('quiz')">Revisar minhas respostas</button>
     </div>
@@ -426,9 +443,9 @@ const QUESTIONS = [
 // ---------- STATE ----------
 let currentQ = 0;
 const answers = new Array(QUESTIONS.length).fill(null);
-let leadData = {nome:"", empresa:"", contato:""};
+let leadData = {nome:"", empresa:"", segmento:"", contato:""};
 let consentAt = '', lastMessage = '';
-const PRIVACY_VERSION = '25/09/2026-v2';
+const PRIVACY_VERSION = '25/09/2026-v3';
 const CONSENT_TEXT = 'Autorizo a Mais Ideias a tratar os dados informados e minhas respostas para gerar e analisar este diagnóstico e entrar em contato sobre ele, conforme o aviso acima.';
 function toggleMotion(){
  const paused=document.body.classList.toggle('motion-off');
@@ -453,6 +470,7 @@ function goTo(screen){
   window.scrollTo({top:0,behavior:'instant'});
 }
 
+document.getElementById('f-segmento').addEventListener('input', checkLeadForm);
 document.getElementById('f-nome').addEventListener('input', checkLeadForm);
 document.getElementById('f-empresa').addEventListener('input', checkLeadForm);
 document.getElementById('f-contato').addEventListener('input', checkLeadForm);
@@ -460,7 +478,7 @@ function checkLeadForm(){
   const nome = document.getElementById('f-nome').value.trim();
   const empresa = document.getElementById('f-empresa').value.trim();
   const contato = document.getElementById('f-contato').value.trim();
-  ['nome','empresa','contato'].forEach(key=>{const field=document.getElementById('f-'+key);field.setCustomValidity(field.value && !field.value.trim() ? 'Preencha este campo.' : '');});
+  ['nome','empresa','segmento','contato'].forEach(key=>{const field=document.getElementById('f-'+key);field.setCustomValidity(field.value && !field.value.trim() ? 'Preencha este campo.' : '');});
 }
 
 function startQuiz(){
@@ -468,6 +486,7 @@ function startQuiz(){
   if(!document.getElementById("lead-form").reportValidity()) return;
   leadData.nome = document.getElementById('f-nome').value.trim();
   leadData.empresa = document.getElementById('f-empresa').value.trim();
+  leadData.segmento = document.getElementById('f-segmento').value.trim();
   leadData.contato = document.getElementById('f-contato').value.trim();
   consentAt = new Date().toISOString();
   currentQ = 0;
@@ -571,17 +590,15 @@ function renderResult(result){
  document.getElementById('result-sub').textContent=profile.sub;
  document.getElementById('result-cta-copy').textContent=profile.cta;
  document.getElementById('whatsapp-cta').textContent=profile.button;
- document.getElementById('priorities-title').textContent=perfect?'Próximos passos de validação':'Por onde começar · prioridades';
+ document.getElementById('priorities-title').textContent=perfect?'O que vale analisar agora':'Seus próximos passos';
  const coverage=excluded.length?'Nota proporcional a '+(rows.length-excluded.length)+' itens avaliados. Fora da nota: '+excluded.map(r=>r.q.label).join(' e ')+'. Esses canais não foram validados.':'Todos os 10 itens foram avaliados com o mesmo peso.';
- const remaining=Math.max(0,result.weaknesses.length-priorities.length);
- document.getElementById('coverage-note').textContent=coverage+(remaining?' Exibimos as 3 primeiras prioridades; as demais respostas seguem no resumo do WhatsApp.':'');
+ document.getElementById('coverage-note').textContent=excluded.length?coverage:'';
  const wrap=document.getElementById('gap-items');wrap.innerHTML='';
- priorities.forEach(item=>{const row=document.createElement('div');row.className='gap-item';const dot=document.createElement('div');dot.className='gap-dot '+item.tone;const text=document.createElement('div');text.className='gap-item-text';const title=document.createElement('b');title.textContent=item.title;text.append(title,document.createTextNode(item.text));if(item.detail){const small=document.createElement('small');small.textContent=item.detail;text.appendChild(small);}row.append(dot,text);wrap.appendChild(row);});
- const lines=['Olá! Fiz o diagnóstico da Mais Ideias. '+profile.intent,'','*DADOS DA EMPRESA*','Nome: '+leadData.nome,'Empresa: '+leadData.empresa,'Site/Instagram: '+leadData.contato,'','*RESULTADO DA AUTOAVALIAÇÃO*','Nota: '+score+'/100 — '+profile.band,'Cálculo: '+result.points+' de '+result.maximum+' pontos possíveis, normalizados para 100.',coverage,profile.headline,profile.sub,'','*RESPOSTAS DO DIAGNÓSTICO*'];
- rows.forEach((r,i)=>lines.push((i+1)+'. '+r.q.label+' ('+(r.opt.p===null?'não se aplica; fora da nota':r.opt.p+'/10')+')',r.q.q,'Resposta: '+r.opt.t,''));
- lines.push(perfect?'*PRÓXIMOS PASSOS DE VALIDAÇÃO*':'*PRIORIDADES IDENTIFICADAS*');
- priorities.forEach(item=>lines.push('• '+item.title+': '+item.text));
- lines.push('','*OBJETIVO DA CONVERSA*',profile.intent,'','Autoavaliação sem auditoria dos canais ou comprovação dos resultados de vendas.','Versão do questionário: 25/09/2026-v3.','','*USO DOS DADOS*',CONSENT_TEXT,'Aviso: '+PRIVACY_VERSION,'Consentimento registrado em: '+consentAt);
+ priorities.forEach((item,index)=>{const row=document.createElement('div');row.className='priority-step';const number=document.createElement('span');number.className='step-number';number.textContent=String(index+1).padStart(2,'0');const content=document.createElement('div');const title=document.createElement('h4');title.textContent=item.title.replace(/ · \d+\/10$/,'');const action=document.createElement('p');action.textContent=item.text;content.append(title,action);row.append(number,content);wrap.appendChild(row);});
+ const lines=['Olá! Fiz o diagnóstico e gostaria de conversar com a Mais Ideias.','','*Meu negócio*','Nome: '+leadData.nome,'Empresa: '+leadData.empresa,'Segmento: '+leadData.segmento,'Site/Instagram: '+leadData.contato,'','*Resultado:* '+score+'/100 — '+profile.band,'',perfect?'*Pontos para nossa conversa*':'*Principais prioridades*'];
+ priorities.forEach((item,index)=>lines.push((index+1)+'. '+item.title.replace(/ · \d+\/10$/,'')+': '+item.text));
+ if(excluded.length)lines.push('','Fora da avaliação: '+excluded.map(r=>r.q.label).join(', ')+'.');
+ lines.push('','*O que busco:* '+profile.intent,'','Autorizei o uso dos dados para este diagnóstico e o contato relacionado. Aviso '+PRIVACY_VERSION+' · '+consentAt);
  lastMessage=lines.join('\n');document.getElementById('whatsapp-cta').href='https://wa.me/5547988689351?text='+encodeURIComponent(lastMessage);document.getElementById('copy-status').textContent='';
 }
 </script>

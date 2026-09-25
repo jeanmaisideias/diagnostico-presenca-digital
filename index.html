@@ -68,6 +68,7 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
 #coverage-note{margin:12px 0 0}
 @media(max-width:700px){.story h1{font-size:30px;line-height:1.12;text-wrap:balance}.headline{font-size:25px}.q-title{font-size:21px}.result-headline{font-size:23px}.site-footer,.site-footer .footer-privacy,.hero-content .note{font-size:12px}.privacy-details,.consent-row{font-size:13px}.hero-content .btn,#btn-lead{font-size:15px}.hero-content{padding:23px 22px}}
 @media(max-width:360px){.story h1{font-size:27px}.hero-content .btn,#btn-lead{font-size:14px}.site-footer,.site-footer .footer-privacy{font-size:12px}}
+.answer-hint{font-size:12px;line-height:1.5;color:var(--muted);margin:-10px 0 17px}
 </style>
 </head>
 <body data-step="intro">
@@ -107,7 +108,7 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
         <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:10%"></div></div>
       </div>
       <h2 class="q-title" id="q-title" tabindex="-1"></h2>
-      <div id="q-options" role="group" aria-labelledby="q-title"></div>
+      <p class="answer-hint">Escolha a opção que mais se aproxima do dia a dia da sua empresa.</p><div id="q-options" role="group" aria-labelledby="q-title"></div>
       <div class="nav-row">
         <button class="btn btn-ghost" id="btn-back" onclick="prevQuestion()">Voltar</button>
         <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>Próxima →</button>
@@ -152,290 +153,290 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
 const QUESTIONS = [
   {
     "tag": "site",
-    "label": "Site ou página de apresentação",
-    "q": "Como funciona o principal site ou página de apresentação da sua empresa?",
+    "label": "Site da empresa",
+    "q": "Como está o site ou a página que apresenta sua empresa?",
     "opts": [
       {
-        "t": "Não temos uma página com informações claras sobre a empresa e a oferta.",
+        "t": "Não temos site nem uma página que apresente bem a empresa.",
         "p": 0
       },
       {
-        "t": "Temos uma página, mas há informações desatualizadas ou dificuldades de uso no celular.",
+        "t": "Temos, mas há informações antigas ou dificuldades para usar no celular.",
         "p": 3
       },
       {
-        "t": "A página funciona no celular, explica a oferta e facilita o contato, mas não medimos as conversões.",
+        "t": "Funciona bem e facilita o contato, mas não sabemos quantos clientes chegam por ele.",
         "p": 7
       },
       {
-        "t": "A página funciona bem no celular e usamos dados de contatos ou vendas para testar melhorias.",
+        "t": "Funciona bem, sabemos quantos contatos ele traz e usamos isso para fazer melhorias.",
         "p": 10
       }
     ],
     "recs": [
-      "Organize uma página com oferta, informações essenciais e um caminho claro de contato.",
-      "Corrija informações e dificuldades de uso no celular antes de ampliar a divulgação.",
-      "Meça os contatos gerados e teste melhorias na página com base nesses dados."
+      "Crie uma página que explique o que a empresa faz e facilite o contato.",
+      "Atualize as informações e confira se a página funciona bem no celular.",
+      "Acompanhe quantos contatos vêm da página e use essa informação para melhorá-la."
     ]
   },
   {
     "tag": "gmn",
-    "label": "Perfil da Empresa no Google",
-    "q": "Se sua empresa atende clientes presencialmente ou na região, como está o perfil no Google?",
+    "label": "Sua empresa no Google",
+    "q": "Como está a ficha da sua empresa no Google, com endereço, horário e avaliações?",
     "opts": [
       {
-        "t": "Não temos perfil ou não sabemos quem administra.",
+        "t": "Não temos essa ficha ou não sabemos como acessá-la.",
         "p": 0
       },
       {
-        "t": "Temos perfil, mas faltam informações ou há dados incorretos.",
+        "t": "Temos, mas faltam informações ou há dados errados.",
         "p": 3
       },
       {
-        "t": "As informações estão corretas, mas as interações e atualizações não têm acompanhamento regular.",
+        "t": "Os dados estão corretos, mas raramente atualizamos fotos ou respondemos às avaliações.",
         "p": 7
       },
       {
-        "t": "Mantemos informações e fotos atualizadas e acompanhamos interações e avaliações.",
+        "t": "Mantemos os dados e as fotos atualizados e acompanhamos as avaliações.",
         "p": 10
       },
       {
-        "t": "Não se aplica: nosso modelo não utiliza atendimento presencial ou local.",
+        "t": "Não se aplica: atendemos só pela internet, sem receber ou visitar clientes.",
         "p": null
       }
     ],
     "recs": [
-      "Verifique a elegibilidade da empresa e organize a criação ou recuperação do perfil.",
-      "Corrija categoria, horários, contatos e demais informações relevantes do perfil.",
-      "Defina uma rotina para conferir informações, interações e avaliações."
+      "Confira se sua empresa pode ter uma ficha no Google e crie ou recupere o acesso.",
+      "Corrija as informações da ficha, como horário, telefone e endereço.",
+      "Reserve um momento para atualizar fotos e responder às avaliações."
     ]
   },
   {
     "tag": "redes",
-    "label": "Conteúdo",
-    "q": "Como sua empresa planeja e avalia o conteúdo nos canais que utiliza?",
+    "label": "Publicações da empresa",
+    "q": "Como vocês cuidam das publicações da empresa na internet?",
     "opts": [
       {
-        "t": "Não temos conteúdo que apresente a oferta e responda às dúvidas dos clientes.",
+        "t": "Não publicamos nada ou quase nada sobre a empresa.",
         "p": 0
       },
       {
-        "t": "Publicamos sem objetivo definido e de forma irregular.",
+        "t": "Publicamos de vez em quando, sem planejar o que vamos mostrar.",
         "p": 3
       },
       {
-        "t": "Temos planejamento e frequência, mas avaliamos principalmente curtidas e alcance.",
+        "t": "Planejamos e publicamos com frequência, mas olhamos mais as curtidas e visualizações.",
         "p": 7
       },
       {
-        "t": "Planejamos conteúdo por objetivo e usamos os resultados de contatos ou vendas para ajustar a estratégia.",
+        "t": "Planejamos as publicações e acompanhamos quais trazem pedidos de informação ou vendas.",
         "p": 10
       }
     ],
     "recs": [
-      "Comece com conteúdo que explique a oferta, responda dúvidas e indique o próximo passo.",
-      "Defina objetivos, temas e uma frequência que sua equipe consiga manter.",
-      "Relacione o conteúdo a contatos qualificados e oportunidades, além de curtidas e alcance."
+      "Comece mostrando o que a empresa faz e respondendo às dúvidas dos clientes.",
+      "Planeje os assuntos e escolha uma frequência de publicação que consiga manter.",
+      "Além de curtidas, acompanhe quais publicações trazem pedidos de informação ou vendas."
     ]
   },
   {
     "tag": "avaliacoes",
-    "label": "Confiança e prova social",
-    "q": "Como sua empresa usa avaliações, depoimentos ou casos reais para gerar confiança?",
+    "label": "Avaliações e depoimentos",
+    "q": "Vocês mostram avaliações, depoimentos ou resultados de clientes?",
     "opts": [
       {
-        "t": "Não temos avaliações, depoimentos ou casos documentados.",
+        "t": "Não temos esse tipo de material.",
         "p": 0
       },
       {
-        "t": "Temos poucos registros e quase não os utilizamos.",
+        "t": "Temos alguns, mas quase nunca mostramos.",
         "p": 3
       },
       {
-        "t": "Usamos provas reais, mas sem uma rotina de atualização e resposta aos comentários.",
+        "t": "Mostramos alguns, mas faz tempo que não pedimos novos relatos.",
         "p": 7
       },
       {
-        "t": "Coletamos e atualizamos provas reais com autorização e as usamos nos pontos de decisão do cliente.",
+        "t": "Pedimos novos relatos e, com autorização, usamos nas publicações e nas conversas de venda.",
         "p": 10
       }
     ],
     "recs": [
-      "Solicite relatos de clientes reais e documente experiências com autorização.",
-      "Organize as provas existentes e coloque as mais relevantes nos canais de contato e venda.",
-      "Crie uma rotina de atualização e resposta e aproxime os casos das dúvidas de cada público."
+      "Peça a clientes reais que contem como foi a experiência com a empresa.",
+      "Organize os relatos que já tem e use os mais relevantes para apresentar a empresa.",
+      "Peça novos relatos e mantenha atualizados os exemplos que mostra aos interessados."
     ]
   },
   {
     "tag": "trafego",
     "label": "Anúncios pagos",
-    "q": "Quando sua empresa usa anúncios pagos, como decide se o investimento funciona?",
+    "q": "Se vocês fazem anúncios no Google ou nas redes sociais, como acompanham o resultado?",
     "opts": [
       {
-        "t": "Queremos usar anúncios, mas ainda não definimos objetivo, oferta ou como medir.",
+        "t": "Ainda não anunciamos e não temos um plano de como começar.",
         "p": 0
       },
       {
-        "t": "Investimos ou testamos, mas não sabemos quais contatos ou vendas vieram dos anúncios.",
+        "t": "Já anunciamos, mas não sabemos quais contatos ou vendas vieram dos anúncios.",
         "p": 3
       },
       {
-        "t": "Acompanhamos cliques e contatos, mas não a qualidade dos leads ou as vendas geradas.",
+        "t": "Sabemos quantos contatos chegam, mas não quantos se tornam clientes.",
         "p": 7
       },
       {
-        "t": "Acompanhamos contatos qualificados, vendas e custos para decidir os próximos investimentos.",
+        "t": "Sabemos quanto gastamos, quantos contatos chegam e quantos se tornam clientes.",
         "p": 10
       },
       {
-        "t": "Não usamos anúncios por opção estratégica; este canal não faz parte da avaliação atual.",
+        "t": "Decidimos não usar anúncios por enquanto. Prefiro deixar esse item fora da avaliação.",
         "p": null
       }
     ],
     "recs": [
-      "Defina oferta, público, objetivo e forma de medir antes de investir.",
-      "Conecte os anúncios aos contatos recebidos para avaliar os testes realizados.",
-      "Acompanhe a qualidade dos contatos e as vendas geradas antes de aumentar a verba."
+      "Antes de anunciar, defina o que divulgar, para quem e como acompanhar o resultado.",
+      "Identifique quais pedidos de informação ou orçamento vêm dos anúncios.",
+      "Acompanhe quantos contatos dos anúncios se tornam clientes antes de aumentar o investimento."
     ]
   },
   {
     "tag": "atendimento",
-    "label": "Atendimento",
-    "q": "Durante o horário informado ao público, como sua empresa atende novos contatos?",
+    "label": "Resposta aos clientes",
+    "q": "No horário de atendimento, o que acontece quando alguém manda uma mensagem?",
     "opts": [
       {
-        "t": "Não há responsável definido; mensagens podem ficar sem resposta.",
+        "t": "Não há quem acompanhe as mensagens; algumas ficam sem resposta.",
         "p": 0
       },
       {
-        "t": "Há atendimento, mas os prazos variam muito e algumas conversas se perdem.",
+        "t": "Alguém responde, mas há atrasos frequentes e conversas que se perdem.",
         "p": 3
       },
       {
-        "t": "Respondemos com regularidade, mas dependemos da disponibilidade de uma pessoa.",
+        "t": "Costumamos responder no prazo, mas às vezes o atendimento para quando alguém está ocupado.",
         "p": 7
       },
       {
-        "t": "Temos responsáveis, prazo de resposta acompanhado e continuidade do atendimento quando necessário.",
+        "t": "Temos um prazo para responder e nos organizamos para não deixar ninguém esperando.",
         "p": 10
       }
     ],
     "recs": [
-      "Defina quem recebe cada contato e uma rotina para evitar mensagens sem resposta.",
-      "Organize a fila de atendimento e acompanhe prazos e conversas pendentes.",
-      "Crie cobertura e passagem de atendimento para reduzir a dependência de uma pessoa."
+      "Defina quem vai acompanhar as mensagens e confira se todas receberam resposta.",
+      "Organize as conversas pendentes e acompanhe o tempo que as pessoas esperam.",
+      "Organize como o atendimento continua nos momentos de maior movimento ou ausência."
     ]
   },
   {
     "tag": "captacao",
-    "label": "Caminho até o contato",
-    "q": "É fácil para alguém interessado entrar em contato com sua empresa?",
+    "label": "Facilidade para entrar em contato",
+    "q": "Quem encontra sua empresa na internet consegue falar com vocês com facilidade?",
     "opts": [
       {
-        "t": "Não há um caminho claro para pedir informação ou orçamento.",
+        "t": "É difícil encontrar como falar com a empresa.",
         "p": 0
       },
       {
-        "t": "Há um contato disponível, mas o cliente precisa procurá-lo ou repetir informações.",
+        "t": "O contato está disponível, mas é preciso procurar ou passar por várias etapas.",
         "p": 3
       },
       {
-        "t": "Links, botões ou formulários funcionam nos canais utilizados, mas não acompanhamos onde há desistências.",
+        "t": "Os links e botões de contato estão fáceis de encontrar e funcionam.",
         "p": 7
       },
       {
-        "t": "Testamos o caminho no celular e acompanhamos os contatos gerados para reduzir dificuldades.",
+        "t": "Além de facilitar o contato, testamos pelo celular e corrigimos as dificuldades que aparecem.",
         "p": 10
       }
     ],
     "recs": [
-      "Disponibilize uma chamada clara e um canal funcional para informação ou orçamento.",
-      "Reduza etapas e facilite o acesso ao canal de contato, especialmente no celular.",
-      "Teste o percurso completo e acompanhe onde as pessoas desistem de entrar em contato."
+      "Deixe o telefone, o WhatsApp ou outra forma de contato fácil de encontrar.",
+      "Diminua os passos necessários para pedir informações ou um orçamento.",
+      "Teste o caminho até o contato pelo celular e peça a alguém para apontar dificuldades."
     ]
   },
   {
     "tag": "acompanhamento",
-    "label": "Acompanhamento comercial",
-    "q": "O que acontece depois que alguém pede informações ou recebe um orçamento?",
+    "label": "Retorno aos interessados",
+    "q": "Depois de enviar um orçamento, como vocês acompanham quem ainda não comprou?",
     "opts": [
       {
-        "t": "Não registramos os contatos e dependemos da memória para retomar conversas.",
+        "t": "Dependemos da memória e geralmente esperamos a pessoa voltar.",
         "p": 0
       },
       {
-        "t": "Registramos parte dos contatos, mas não há rotina de retorno.",
+        "t": "Anotamos alguns contatos, mas só retomamos a conversa de vez em quando.",
         "p": 3
       },
       {
-        "t": "Temos registro e retornos, mas nem sempre sabemos a etapa ou o motivo da perda.",
+        "t": "Anotamos e fazemos retornos, mas nem sempre sabemos por que a pessoa não comprou.",
         "p": 7
       },
       {
-        "t": "Registramos etapa, responsável e próximo contato e analisamos vendas e motivos de perda.",
+        "t": "Anotamos o próximo retorno e acompanhamos quem comprou e por que outros não compraram.",
         "p": 10
       }
     ],
     "recs": [
-      "Crie um registro dos contatos com responsável e próximo passo, em CRM ou controle simples.",
-      "Defina datas de retorno e uma rotina para acompanhar as conversas abertas.",
-      "Registre etapas e motivos de perda para melhorar as abordagens e os retornos."
+      "Anote os pedidos de orçamento e o próximo passo de cada conversa.",
+      "Defina quando retomar cada conversa, sem depender apenas da memória.",
+      "Registre o que aconteceu após o retorno e os motivos de quem não comprou."
     ]
   },
   {
     "tag": "mensuracao",
-    "label": "Mensuração de resultados",
-    "q": "Quais informações sua empresa usa para decidir o que mudar no marketing?",
+    "label": "Resultados do marketing",
+    "q": "Como vocês decidem se a divulgação da empresa está funcionando?",
     "opts": [
       {
-        "t": "Decidimos por impressão, sem acompanhar resultados de forma organizada.",
+        "t": "Vamos pela impressão, sem anotar os resultados.",
         "p": 0
       },
       {
-        "t": "Acompanhamos curtidas, alcance ou visitas, mas não os contatos gerados.",
+        "t": "Olhamos curtidas, visualizações ou visitas, mas não os pedidos de informação.",
         "p": 3
       },
       {
-        "t": "Acompanhamos contatos e algumas vendas, mas não conectamos origem, conversão e custos.",
+        "t": "Anotamos contatos e vendas, mas não sabemos bem de onde vêm ou quanto custam.",
         "p": 7
       },
       {
-        "t": "Relacionamos origem, contatos, vendas e custos e revisamos os dados para decidir os ajustes.",
+        "t": "Sabemos de onde vêm os clientes, quanto gastamos e quais ações geram vendas.",
         "p": 10
       }
     ],
     "recs": [
-      "Comece com um controle simples de origem, contatos recebidos e vendas.",
-      "Inclua contatos qualificados e oportunidades na avaliação dos canais.",
-      "Conecte a origem dos contatos às vendas e aos custos para comparar os canais com mais clareza."
+      "Comece anotando de onde vieram os contatos e quais se tornaram clientes.",
+      "Acompanhe também os pedidos de informação e orçamento que a divulgação gera.",
+      "Relacione as vendas ao lugar de onde o cliente veio e ao valor gasto na divulgação."
     ]
   },
   {
     "tag": "identidade",
-    "label": "Clareza e consistência da marca",
-    "q": "A apresentação da empresa deixa claro o que ela oferece e por que escolhê-la?",
+    "label": "Apresentação da empresa",
+    "q": "Nas páginas e redes sociais, fica claro o que sua empresa faz e por que escolhê-la?",
     "opts": [
       {
-        "t": "As informações e a apresentação variam muito entre os canais.",
+        "t": "As informações e o visual mudam muito de um lugar para outro.",
         "p": 0
       },
       {
-        "t": "Há algum padrão visual, mas a oferta e os diferenciais não ficam claros.",
+        "t": "O visual tem algum padrão, mas o que fazemos e nossos pontos fortes não ficam claros.",
         "p": 3
       },
       {
-        "t": "A oferta está clara e os principais canais seguem um padrão, com algumas inconsistências.",
+        "t": "Fica claro o que fazemos e o visual é parecido, mas alguns detalhes ainda não combinam.",
         "p": 7
       },
       {
-        "t": "Os canais utilizados têm apresentação consistente, oferta clara e diferenciais sustentados por provas.",
+        "t": "O visual e as informações combinam, e mostramos exemplos do que fazemos bem.",
         "p": 10
       }
     ],
     "recs": [
-      "Alinhe nome, contatos, oferta e apresentação nos canais utilizados.",
-      "Explique a oferta e os diferenciais com exemplos concretos, além do padrão visual.",
-      "Revise as inconsistências entre os canais e sustente os diferenciais com provas."
+      "Use informações e apresentação coerentes em todos os lugares onde a empresa aparece.",
+      "Explique com clareza o que oferece e mostre exemplos dos seus pontos fortes.",
+      "Ajuste os detalhes que ainda não combinam e use exemplos para mostrar seus pontos fortes."
     ]
   }
 ];

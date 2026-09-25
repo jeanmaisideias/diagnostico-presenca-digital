@@ -40,6 +40,8 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
 .hero-content .btn{background:#15803d;border-color:#15803d;color:#fff}.hero-content .btn:hover{background:#166534;border-color:#166534;color:#fff}
 .hero-photo{object-position:50% 45%}
 @media(max-width:700px){.hero-photo{height:clamp(230px,36svh,300px);aspect-ratio:auto;object-fit:cover;object-position:50% 43%}}
+
+.gap-dot.good{background:var(--roxo-claro)}#coverage-note{text-align:left;margin:0 0 14px;font-size:11px}.gap-item-text small{display:block;color:var(--muted);font-size:11px;margin-top:6px}.result-sub{white-space:normal}
 </style>
 </head>
 <body data-step="intro">
@@ -103,15 +105,15 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
       <div class="result-sub" id="result-sub">—</div>
 
       <div class="gap-list">
-        <h3>Suas prioridades de evolução</h3>
+        <h3 id="priorities-title">Suas prioridades de evolução</h3><p class="note" id="coverage-note"></p>
         <div id="gap-items"></div>
       </div>
 
       <div class="cta-block">
-        <p>Quer um plano prático pra sair dessa nota e fechar mais venda pela internet? A Mais Ideias monta isso com você.</p>
+        <p id="result-cta-copy"></p>
         <a class="btn btn-lime" id="whatsapp-cta" href="#" target="_blank" rel="noopener">Enviar diagnóstico pelo WhatsApp</a><p class="share-note">A mensagem inclui seus dados, a nota e as 10 respostas. Você pode revisá-la no WhatsApp antes de enviar.</p><p class="note" id="copy-status" role="status" hidden></p>
       </div>
-      <div class="note" id="save-note" role="status"></div><p class="note">Avaliação indicativa baseada nas suas respostas.<br>Não substitui uma auditoria dos seus canais.</p><button class="restart" onclick="currentQ=0;renderQuestion();goTo('quiz')">Revisar minhas respostas</button>
+      <div class="note" id="save-note" role="status"></div><p class="note">Autoavaliação baseada no que você informou, sem auditoria dos canais.<br>A nota não comprova resultados de vendas nem garante desempenho futuro.</p><button class="restart" onclick="currentQ=0;renderQuestion();goTo('quiz')">Revisar minhas respostas</button>
     </div>
 
   </div>
@@ -120,123 +122,297 @@ body[data-step=intro] .hero-content .eyebrow,body[data-step=intro] .story h1 em{
 </div>
 
 <script>
-// ---------- QUESTIONS ----------
-// each option: { t: text, p: points (0,3,7,10) }
 const QUESTIONS = [
   {
-    tag: "site",
-    q: "Como está o site do seu negócio hoje?",
-    opts: [
-      {t:"Não tenho site", p:0},
-      {t:"Tenho, mas está desatualizado ou lento", p:3},
-      {t:"Tenho um site ok, funcional", p:7},
-      {t:"Tenho um site rápido, atualizado e pensado pra converter", p:10},
+    "tag": "site",
+    "label": "Site ou página de apresentação",
+    "q": "Como funciona o principal site ou página de apresentação da sua empresa?",
+    "opts": [
+      {
+        "t": "Não temos uma página com informações claras sobre a empresa e a oferta.",
+        "p": 0
+      },
+      {
+        "t": "Temos uma página, mas há informações desatualizadas ou dificuldades de uso no celular.",
+        "p": 3
+      },
+      {
+        "t": "A página funciona no celular, explica a oferta e facilita o contato, mas não medimos as conversões.",
+        "p": 7
+      },
+      {
+        "t": "A página funciona bem no celular e usamos dados de contatos ou vendas para testar melhorias.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Organize uma página com oferta, informações essenciais e um caminho claro de contato.",
+      "Corrija informações e dificuldades de uso no celular antes de ampliar a divulgação.",
+      "Meça os contatos gerados e teste melhorias na página com base nesses dados."
     ]
   },
   {
-    tag: "gmn",
-    q: "Seu Google Meu Negócio está completo e ativo?",
-    opts: [
-      {t:"Não tenho perfil no Google", p:0},
-      {t:"Tenho, mas está incompleto ou desatualizado", p:3},
-      {t:"Está completo, mas eu não mexo nele", p:7},
-      {t:"Completo, com fotos, posts e respondo avaliações", p:10},
+    "tag": "gmn",
+    "label": "Perfil da Empresa no Google",
+    "q": "Se sua empresa atende clientes presencialmente ou na região, como está o perfil no Google?",
+    "opts": [
+      {
+        "t": "Não temos perfil ou não sabemos quem administra.",
+        "p": 0
+      },
+      {
+        "t": "Temos perfil, mas faltam informações ou há dados incorretos.",
+        "p": 3
+      },
+      {
+        "t": "As informações estão corretas, mas as interações e atualizações não têm acompanhamento regular.",
+        "p": 7
+      },
+      {
+        "t": "Mantemos informações e fotos atualizadas e acompanhamos interações e avaliações.",
+        "p": 10
+      },
+      {
+        "t": "Não se aplica: nosso modelo não utiliza atendimento presencial ou local.",
+        "p": null
+      }
+    ],
+    "recs": [
+      "Verifique a elegibilidade da empresa e organize a criação ou recuperação do perfil.",
+      "Corrija categoria, horários, contatos e demais informações relevantes do perfil.",
+      "Defina uma rotina para conferir informações, interações e avaliações."
     ]
   },
   {
-    tag: "redes",
-    q: "Com que frequência você posta nas redes sociais do negócio?",
-    opts: [
-      {t:"Não posto ou é muito raro", p:0},
-      {t:"De vez em quando, sem constância", p:3},
-      {t:"Toda semana, mas sem estratégia clara", p:7},
-      {t:"Tenho calendário e estratégia de conteúdo definidos", p:10},
+    "tag": "redes",
+    "label": "Conteúdo",
+    "q": "Como sua empresa planeja e avalia o conteúdo nos canais que utiliza?",
+    "opts": [
+      {
+        "t": "Não temos conteúdo que apresente a oferta e responda às dúvidas dos clientes.",
+        "p": 0
+      },
+      {
+        "t": "Publicamos sem objetivo definido e de forma irregular.",
+        "p": 3
+      },
+      {
+        "t": "Temos planejamento e frequência, mas avaliamos principalmente curtidas e alcance.",
+        "p": 7
+      },
+      {
+        "t": "Planejamos conteúdo por objetivo e usamos os resultados de contatos ou vendas para ajustar a estratégia.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Comece com conteúdo que explique a oferta, responda dúvidas e indique o próximo passo.",
+      "Defina objetivos, temas e uma frequência que sua equipe consiga manter.",
+      "Relacione o conteúdo a contatos qualificados e oportunidades, além de curtidas e alcance."
     ]
   },
   {
-    tag: "avaliacoes",
-    q: "Como estão as avaliações do seu negócio online?",
-    opts: [
-      {t:"Poucas ou nenhuma avaliação", p:0},
-      {t:"Algumas, mas nota baixa ou mista", p:3},
-      {t:"Nota boa, mas poucas avaliações recentes", p:7},
-      {t:"Muitas avaliações recentes e nota alta", p:10},
+    "tag": "avaliacoes",
+    "label": "Confiança e prova social",
+    "q": "Como sua empresa usa avaliações, depoimentos ou casos reais para gerar confiança?",
+    "opts": [
+      {
+        "t": "Não temos avaliações, depoimentos ou casos documentados.",
+        "p": 0
+      },
+      {
+        "t": "Temos poucos registros e quase não os utilizamos.",
+        "p": 3
+      },
+      {
+        "t": "Usamos provas reais, mas sem uma rotina de atualização e resposta aos comentários.",
+        "p": 7
+      },
+      {
+        "t": "Coletamos e atualizamos provas reais com autorização e as usamos nos pontos de decisão do cliente.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Solicite relatos de clientes reais e documente experiências com autorização.",
+      "Organize as provas existentes e coloque as mais relevantes nos canais de contato e venda.",
+      "Crie uma rotina de atualização e resposta e aproxime os casos das dúvidas de cada público."
     ]
   },
   {
-    tag: "trafego",
-    q: "Você investe em anúncios pagos (Meta Ads / Google Ads)?",
-    opts: [
-      {t:"Nunca investi", p:0},
-      {t:"Já testei, mas sem resultado ou sem gestão", p:3},
-      {t:"Invisto, mas não sei se o retorno é bom", p:7},
-      {t:"Invisto de forma constante e acompanho o retorno", p:10},
+    "tag": "trafego",
+    "label": "Anúncios pagos",
+    "q": "Quando sua empresa usa anúncios pagos, como decide se o investimento funciona?",
+    "opts": [
+      {
+        "t": "Queremos usar anúncios, mas ainda não definimos objetivo, oferta ou como medir.",
+        "p": 0
+      },
+      {
+        "t": "Investimos ou testamos, mas não sabemos quais contatos ou vendas vieram dos anúncios.",
+        "p": 3
+      },
+      {
+        "t": "Acompanhamos cliques e contatos, mas não a qualidade dos leads ou as vendas geradas.",
+        "p": 7
+      },
+      {
+        "t": "Acompanhamos contatos qualificados, vendas e custos para decidir os próximos investimentos.",
+        "p": 10
+      },
+      {
+        "t": "Não usamos anúncios por opção estratégica; este canal não faz parte da avaliação atual.",
+        "p": null
+      }
+    ],
+    "recs": [
+      "Defina oferta, público, objetivo e forma de medir antes de investir.",
+      "Conecte os anúncios aos contatos recebidos para avaliar os testes realizados.",
+      "Acompanhe a qualidade dos contatos e as vendas geradas antes de aumentar a verba."
     ]
   },
   {
-    tag: "atendimento",
-    q: "Qual a velocidade de resposta no WhatsApp/redes quando um cliente chama?",
-    opts: [
-      {t:"Demoro horas ou dias pra responder", p:0},
-      {t:"Depende do dia, às vezes demoro", p:3},
-      {t:"Respondo no mesmo dia, geralmente", p:7},
-      {t:"Respondo em minutos, com atendimento estruturado", p:10},
+    "tag": "atendimento",
+    "label": "Atendimento",
+    "q": "Durante o horário informado ao público, como sua empresa atende novos contatos?",
+    "opts": [
+      {
+        "t": "Não há responsável definido; mensagens podem ficar sem resposta.",
+        "p": 0
+      },
+      {
+        "t": "Há atendimento, mas os prazos variam muito e algumas conversas se perdem.",
+        "p": 3
+      },
+      {
+        "t": "Respondemos com regularidade, mas dependemos da disponibilidade de uma pessoa.",
+        "p": 7
+      },
+      {
+        "t": "Temos responsáveis, prazo de resposta acompanhado e continuidade do atendimento quando necessário.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Defina quem recebe cada contato e uma rotina para evitar mensagens sem resposta.",
+      "Organize a fila de atendimento e acompanhe prazos e conversas pendentes.",
+      "Crie cobertura e passagem de atendimento para reduzir a dependência de uma pessoa."
     ]
   },
   {
-    tag: "captacao",
-    q: "Seu site ou redes sociais capturam contato de quem tem interesse?",
-    opts: [
-      {t:"Não tenho nenhum formulário, link ou botão de contato", p:0},
-      {t:"Só tenho um número de WhatsApp solto na bio", p:3},
-      {t:"Tenho link/botão de contato em todos os canais", p:7},
-      {t:"Tenho formulário, botão de WhatsApp e capturo lead ativamente", p:10},
+    "tag": "captacao",
+    "label": "Caminho até o contato",
+    "q": "É fácil para alguém interessado entrar em contato com sua empresa?",
+    "opts": [
+      {
+        "t": "Não há um caminho claro para pedir informação ou orçamento.",
+        "p": 0
+      },
+      {
+        "t": "Há um contato disponível, mas o cliente precisa procurá-lo ou repetir informações.",
+        "p": 3
+      },
+      {
+        "t": "Links, botões ou formulários funcionam nos canais utilizados, mas não acompanhamos onde há desistências.",
+        "p": 7
+      },
+      {
+        "t": "Testamos o caminho no celular e acompanhamos os contatos gerados para reduzir dificuldades.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Disponibilize uma chamada clara e um canal funcional para informação ou orçamento.",
+      "Reduza etapas e facilite o acesso ao canal de contato, especialmente no celular.",
+      "Teste o percurso completo e acompanhe onde as pessoas desistem de entrar em contato."
     ]
   },
   {
-    tag: "provasocial",
-    q: "Você usa depoimentos, cases ou provas de resultado no seu marketing?",
-    opts: [
-      {t:"Nunca usei", p:0},
-      {t:"Tenho alguns, mas não uso ativamente", p:3},
-      {t:"Uso de vez em quando", p:7},
-      {t:"Uso com frequência em posts, site e vendas", p:10},
+    "tag": "acompanhamento",
+    "label": "Acompanhamento comercial",
+    "q": "O que acontece depois que alguém pede informações ou recebe um orçamento?",
+    "opts": [
+      {
+        "t": "Não registramos os contatos e dependemos da memória para retomar conversas.",
+        "p": 0
+      },
+      {
+        "t": "Registramos parte dos contatos, mas não há rotina de retorno.",
+        "p": 3
+      },
+      {
+        "t": "Temos registro e retornos, mas nem sempre sabemos a etapa ou o motivo da perda.",
+        "p": 7
+      },
+      {
+        "t": "Registramos etapa, responsável e próximo contato e analisamos vendas e motivos de perda.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Crie um registro dos contatos com responsável e próximo passo, em CRM ou controle simples.",
+      "Defina datas de retorno e uma rotina para acompanhar as conversas abertas.",
+      "Registre etapas e motivos de perda para melhorar as abordagens e os retornos."
     ]
   },
   {
-    tag: "concorrencia",
-    q: "Você sabe como sua presença digital se compara à dos concorrentes da sua região?",
-    opts: [
-      {t:"Não faço ideia", p:0},
-      {t:"Tenho uma noção vaga", p:3},
-      {t:"Acompanho de vez em quando", p:7},
-      {t:"Acompanho de perto e ajusto minha estratégia com base nisso", p:10},
+    "tag": "mensuracao",
+    "label": "Mensuração de resultados",
+    "q": "Quais informações sua empresa usa para decidir o que mudar no marketing?",
+    "opts": [
+      {
+        "t": "Decidimos por impressão, sem acompanhar resultados de forma organizada.",
+        "p": 0
+      },
+      {
+        "t": "Acompanhamos curtidas, alcance ou visitas, mas não os contatos gerados.",
+        "p": 3
+      },
+      {
+        "t": "Acompanhamos contatos e algumas vendas, mas não conectamos origem, conversão e custos.",
+        "p": 7
+      },
+      {
+        "t": "Relacionamos origem, contatos, vendas e custos e revisamos os dados para decidir os ajustes.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Comece com um controle simples de origem, contatos recebidos e vendas.",
+      "Inclua contatos qualificados e oportunidades na avaliação dos canais.",
+      "Conecte a origem dos contatos às vendas e aos custos para comparar os canais com mais clareza."
     ]
   },
   {
-    tag: "identidade",
-    q: "Sua marca tem a mesma identidade visual (logo, cores, tom) em todos os canais?",
-    opts: [
-      {t:"Cada canal é diferente, sem padrão", p:0},
-      {t:"Só uma parte dos canais segue um padrão", p:3},
-      {t:"A maioria segue, com algumas exceções", p:7},
-      {t:"Identidade consistente em site, redes e materiais", p:10},
+    "tag": "identidade",
+    "label": "Clareza e consistência da marca",
+    "q": "A apresentação da empresa deixa claro o que ela oferece e por que escolhê-la?",
+    "opts": [
+      {
+        "t": "As informações e a apresentação variam muito entre os canais.",
+        "p": 0
+      },
+      {
+        "t": "Há algum padrão visual, mas a oferta e os diferenciais não ficam claros.",
+        "p": 3
+      },
+      {
+        "t": "A oferta está clara e os principais canais seguem um padrão, com algumas inconsistências.",
+        "p": 7
+      },
+      {
+        "t": "Os canais utilizados têm apresentação consistente, oferta clara e diferenciais sustentados por provas.",
+        "p": 10
+      }
+    ],
+    "recs": [
+      "Alinhe nome, contatos, oferta e apresentação nos canais utilizados.",
+      "Explique a oferta e os diferenciais com exemplos concretos, além do padrão visual.",
+      "Revise as inconsistências entre os canais e sustente os diferenciais com provas."
     ]
-  },
+  }
 ];
 
-const RECOMMENDATIONS = {
-site:'<b>Um site que facilite a decisão.</b>Revise velocidade, informações e caminhos de contato, especialmente no celular.',
-gmn:'<b>Sua empresa no Google.</b>Complete o perfil, atualize horários e fotos e mantenha as informações corretas.',
-redes:'<b>Conteúdo com direção.</b>Organize um calendário que conecte as dúvidas do cliente à sua oferta.',
-avaliacoes:'<b>Reputação que transmite confiança.</b>Solicite avaliações de clientes reais e responda aos comentários.',
-trafego:'<b>Anúncios com objetivo e acompanhamento.</b>Defina público, oferta e métricas antes de ampliar o investimento.',
-atendimento:'<b>Atendimento que não deixa a conversa esfriar.</b>Defina responsáveis, prazo de resposta e rotina de acompanhamento.',
-captacao:'<b>Contato sem obstáculos.</b>Deixe botões, links e formulários claros nos principais canais.',
-provasocial:'<b>Mostre por que escolher sua empresa.</b>Use depoimentos e casos reais nos pontos de decisão.',
-concorrencia:'<b>Conheça o cenário ao seu redor.</b>Compare canais e ofertas para identificar oportunidades de diferenciação.',
-identidade:'<b>Uma marca reconhecível em cada canal.</b>Padronize cores, linguagem e apresentação da sua empresa.'
-};
 // ---------- STATE ----------
 let currentQ = 0;
 const answers = new Array(QUESTIONS.length).fill(null);
@@ -339,80 +515,65 @@ function prevQuestion(){
 }
 function questionTop(){document.getElementById("q-title").focus({preventScroll:true});window.scrollTo({top:0,behavior:"instant"});}
 
-// ---------- SCORING + RESULT ----------
+// A score is the normalized sum of applicable, self-reported answers.
+// An explicit not-applicable choice is excluded, never treated as a positive answer.
+const PROFILES = [
+ {max:39,band:'Base inicial',cls:'band-critico',color:'var(--red)',headline:'O primeiro passo é organizar a base.',sub:'Suas respostas indicam várias rotinas ainda ausentes ou pouco estruturadas. Comece pelas prioridades abaixo antes de ampliar canais ou investimento.',cta:'A Mais Ideias pode ajudar a organizar os fundamentos e definir o que fazer primeiro, de acordo com sua realidade.',button:'Quero organizar minha base',intent:'Quero ajuda para organizar a base e definir as primeiras prioridades.'},
+ {max:69,band:'Em desenvolvimento',cls:'band-mediano',color:'var(--amber)',headline:'Sua empresa já tem iniciativas. Falta dar consistência.',sub:'Há práticas em funcionamento, mas algumas ainda dependem de ações pontuais ou não são acompanhadas. O foco é consolidar rotinas e corrigir os pontos mais frágeis.',cta:'Vamos analisar os pontos identificados e montar uma sequência de melhorias para dar mais consistência ao marketing e ao atendimento.',button:'Quero consolidar minha estratégia',intent:'Quero consolidar as rotinas e melhorar os pontos identificados.'},
+ {max:89,band:'Estruturado',cls:'band-forte',color:'var(--roxo-claro)',headline:'Sua base está estruturada. O foco é melhorar a eficiência.',sub:'As respostas indicam boas práticas em vários pontos. Agora vale trabalhar os ajustes específicos e medir o efeito das mudanças antes de ampliar o investimento.',cta:'A Mais Ideias pode revisar os ajustes apontados e ajudar a testar melhorias com metas e indicadores claros.',button:'Quero otimizar minha operação',intent:'Quero revisar os ajustes específicos e testar melhorias de eficiência.'},
+ {max:100,band:'Avançado',cls:'band-forte',color:'var(--roxo-claro)',headline:'Sua operação apresenta um nível avançado.',sub:'Você relatou práticas bem estruturadas na maior parte dos itens. O próximo passo é conferir os dados e as oportunidades de melhoria antes de decidir como crescer.',cta:'Vamos analisar os indicadores e os pontos específicos do diagnóstico para avaliar oportunidades de crescimento com mais critério.',button:'Quero uma análise estratégica',intent:'Quero uma análise estratégica dos indicadores e das oportunidades de crescimento.'}
+];
+function buildAssessment(selected){
+ if(selected.length!==QUESTIONS.length) throw new Error('Diagnóstico incompleto');
+ const rows=QUESTIONS.map((q,i)=>{const index=selected[i];if(!Number.isInteger(index)||!q.opts[index])throw new Error('Resposta inválida');return {q,index,opt:q.opts[index],order:i};});
+ const applicable=rows.filter(r=>r.opt.p!==null);
+ if(!applicable.length)throw new Error('Sem itens avaliados');
+ const points=applicable.reduce((sum,r)=>sum+r.opt.p,0);
+ const score=Math.round(points/(applicable.length*10)*100);
+ const profile={...PROFILES.find(p=>score<=p.max)};
+ const weaknesses=applicable.filter(r=>r.opt.p<10).sort((a,b)=>a.opt.p-b.opt.p||a.order-b.order);
+ const critical=weaknesses.filter(r=>r.opt.p<=3);
+ const perfect=applicable.every(r=>r.opt.p===10);
+ if(perfect){Object.assign(profile,{headline:'Pontuação máxima nos itens avaliados.',sub:'Você informou a prática mais estruturada em todos os itens que se aplicam ao seu negócio. Isso não significa que não existam oportunidades: esta autoavaliação precisa ser confrontada com os resultados reais.',cta:'O próximo passo é validar o desempenho real. A Mais Ideias pode oferecer um olhar externo sobre os indicadores e ajudar a avaliar próximos testes e oportunidades.',button:'Quero validar meus próximos passos',intent:'Atingi a pontuação máxima nos itens avaliados e quero um olhar externo para validar os indicadores e os próximos passos.'});}
+ // A high total must never hide a weak individual answer.
+ if(score>=70&&critical.length){profile.sub+=' Apesar da nota geral, '+critical.length+(critical.length===1?' item exige atenção prioritária.':' itens exigem atenção prioritária.');profile.cta='Antes de ampliar o investimento, vamos revisar '+(critical.length===1?'o ponto frágil indicado':'os pontos frágeis indicados')+' e validar os indicadores da operação.';profile.button='Quero revisar minhas prioridades';profile.intent='Minha nota geral é alta, mas quero revisar os pontos frágeis identificados antes de ampliar o investimento.';}
+ const priorities=weaknesses.slice(0,3).map(r=>({title:r.q.label+' · '+r.opt.p+'/10',text:r.q.recs[r.index],detail:r.opt.p===0?'Estruturar este ponto':r.opt.p===3?'Corrigir ou consolidar a rotina':'Aprimorar e medir',tone:r.opt.p===0?'neg':r.opt.p===3?'warn':'good'}));
+ if(perfect){priorities.push(
+ {title:'Conferir os dados reais',text:'Revise se os registros de origem, contatos, vendas e custos sustentam a percepção informada.',tone:'good'},
+ {title:'Avaliar capacidade e rentabilidade',text:'Antes de buscar mais volume, confira margem, capacidade de atendimento e consistência dos resultados.',tone:'good'},
+ {title:'Definir o próximo teste',text:'Escolha uma hipótese de melhoria, um indicador e um período de avaliação, sem presumir que aumentar a verba seja o melhor caminho.',tone:'good'}
+ );}
+ return {score,points,maximum:applicable.length*10,profile,priorities,perfect,weaknesses,critical,rows,excluded:rows.filter(r=>r.opt.p===null)};
+}
 function finishQuiz(){
-  if(answers.some(a=>a===null)) return;
-  if(!document.getElementById('f-consent').checked){goTo('lead');document.getElementById('lead-form').reportValidity();return;}
-  let score = 0;
-  const gaps = [];
-  QUESTIONS.forEach((q, idx)=>{
-    const chosen = q.opts[answers[idx]];
-    score += chosen.p;
-    if(chosen.p <= 3){
-      gaps.push({tag:q.tag, q:q.q, p:chosen.p});
-    }
-  });
-
-  renderResult(score, gaps);
-  goTo('result');
-  document.getElementById('save-note').textContent = 'Seu diagnóstico será compartilhado quando você enviar a mensagem no WhatsApp.';
+ if(answers.some(a=>a===null))return;
+ if(!document.getElementById('f-consent').checked){goTo('lead');document.getElementById('lead-form').reportValidity();return;}
+ renderResult(buildAssessment(answers));goTo('result');
+ document.getElementById('save-note').textContent='Seu diagnóstico será compartilhado quando você enviar a mensagem no WhatsApp.';
 }
-
-function renderResult(score, gaps){
-  document.getElementById('result-person').textContent=leadData.nome+' · '+leadData.empresa;
-  document.getElementById('score-num').innerHTML = score + '<span>/100</span>';
-
-  const circumference = 515; // 2*pi*82
-  const offset = circumference - (circumference * score/100);
-  const circle = document.getElementById('gauge-circle');
-  circle.style.strokeDashoffset = offset;
-
-  let band, bandClass, headline, sub, color;
-  if(score <= 40){
-    band='Crítico'; bandClass='band-critico'; color='var(--red)';
-    headline='Sua presença digital precisa de atenção.';
-    sub='A presença digital está com falhas em pontos básicos — isso significa oportunidade de venda passando batido agora mesmo.';
-  } else if(score <= 70){
-    band='Mediano'; bandClass='band-mediano'; color='var(--amber)';
-    headline='Você tem base, mas ainda deixa venda na mesa.';
-    sub='Alguns pilares estão bons, outros estão travando sua conversão. Ajustes pontuais já mudam o resultado.';
-  } else {
-    band='Forte'; bandClass='band-forte'; color='var(--lime)';
-    headline='Presença digital sólida — hora de escalar.';
-    sub='A base está bem construída. O próximo passo é otimizar o que já funciona pra crescer com mais eficiência.';
-  }
-  circle.setAttribute('stroke', color);
-  document.getElementById('band-tag').textContent = band;
-  document.getElementById('band-tag').className = 'band-tag ' + bandClass;
-  document.getElementById('result-headline').textContent = headline;
-  document.getElementById('result-sub').textContent = sub;
-
-  const gapWrap = document.getElementById('gap-items');
-  gapWrap.innerHTML = '';
-  const topGaps = [...gaps].sort((a,b)=>a.p-b.p).slice(0,4);
-  if(topGaps.length===0){
-    gapWrap.innerHTML = '<div class="gap-item"><div class="gap-dot warn"></div><div class="gap-item-text">Nenhum ponto crítico — sua presença está consistente nos fundamentos.</div></div>';
-  } else {
-    topGaps.forEach(g=>{
-      const dotClass = g.p===0 ? 'neg' : 'warn';
-      const div = document.createElement('div');
-      div.className = 'gap-item';
-      div.innerHTML = '<div class="gap-dot '+dotClass+'"></div><div class="gap-item-text">'+RECOMMENDATIONS[g.tag]+'</div>';
-      gapWrap.appendChild(div);
-    });
-  }
-
-  const categories = ['Site','Perfil no Google','Redes sociais','Avaliações','Anúncios pagos','Atendimento','Captação de contatos','Prova social','Concorrência','Identidade da marca'];
-  const lines = ['Olá! Fiz o diagnóstico da Mais Ideias e quero conversar sobre o resultado.', '', '*DADOS DA EMPRESA*', 'Nome: '+leadData.nome, 'Empresa: '+leadData.empresa, 'Site/Instagram: '+leadData.contato, '', '*RESULTADO*', 'Nota: '+score+'/100 — '+band, '', '*RESPOSTAS DO DIAGNÓSTICO*'];
-  QUESTIONS.forEach((q,i)=>{const option=q.opts[answers[i]];lines.push((i+1)+'. '+categories[i]+' ('+option.p+'/10)',q.q,'Resposta: '+option.t,'');});
-  lines.push('*PRIORIDADES IDENTIFICADAS*');
-  if(topGaps.length){topGaps.forEach(g=>{const el=document.createElement('div');el.innerHTML=RECOMMENDATIONS[g.tag].replace('</b>','</b> ');lines.push('• '+el.textContent);});}else{lines.push('Nenhum ponto crítico identificado nas respostas. Avaliar oportunidades de otimização.');}
-  lines.push('', '*USO DOS DADOS*', CONSENT_TEXT, 'Aviso: '+PRIVACY_VERSION, 'Consentimento registrado em: '+consentAt);
-  lastMessage=lines.join('\n');
-  document.getElementById('whatsapp-cta').href = 'https://wa.me/5547988689351?text=' + encodeURIComponent(lastMessage);
-  document.getElementById('copy-status').textContent='';
+function renderResult(result){
+ const {score,profile,priorities,rows,excluded,perfect}=result;
+ document.getElementById('result-person').textContent=leadData.nome+' · '+leadData.empresa;
+ document.getElementById('score-num').innerHTML=score+'<span>/100</span>';
+ const circle=document.getElementById('gauge-circle');circle.style.strokeDashoffset=515-515*score/100;circle.setAttribute('stroke',profile.color);
+ document.getElementById('band-tag').textContent=profile.band;document.getElementById('band-tag').className='band-tag '+profile.cls;
+ document.getElementById('result-headline').textContent=profile.headline;
+ document.getElementById('result-sub').textContent=profile.sub;
+ document.getElementById('result-cta-copy').textContent=profile.cta;
+ document.getElementById('whatsapp-cta').textContent=profile.button;
+ document.getElementById('priorities-title').textContent=perfect?'Próximos passos de validação':'Por onde começar · prioridades';
+ const coverage=excluded.length?'Nota proporcional a '+(rows.length-excluded.length)+' itens avaliados. Fora da nota: '+excluded.map(r=>r.q.label).join(' e ')+'. Esses canais não foram validados.':'Todos os 10 itens foram avaliados com o mesmo peso.';
+ const remaining=Math.max(0,result.weaknesses.length-priorities.length);
+ document.getElementById('coverage-note').textContent=coverage+(remaining?' Exibimos as 3 primeiras prioridades; as demais respostas seguem no resumo do WhatsApp.':'');
+ const wrap=document.getElementById('gap-items');wrap.innerHTML='';
+ priorities.forEach(item=>{const row=document.createElement('div');row.className='gap-item';const dot=document.createElement('div');dot.className='gap-dot '+item.tone;const text=document.createElement('div');text.className='gap-item-text';const title=document.createElement('b');title.textContent=item.title;text.append(title,document.createTextNode(item.text));if(item.detail){const small=document.createElement('small');small.textContent=item.detail;text.appendChild(small);}row.append(dot,text);wrap.appendChild(row);});
+ const lines=['Olá! Fiz o diagnóstico da Mais Ideias. '+profile.intent,'','*DADOS DA EMPRESA*','Nome: '+leadData.nome,'Empresa: '+leadData.empresa,'Site/Instagram: '+leadData.contato,'','*RESULTADO DA AUTOAVALIAÇÃO*','Nota: '+score+'/100 — '+profile.band,'Cálculo: '+result.points+' de '+result.maximum+' pontos possíveis, normalizados para 100.',coverage,profile.headline,profile.sub,'','*RESPOSTAS DO DIAGNÓSTICO*'];
+ rows.forEach((r,i)=>lines.push((i+1)+'. '+r.q.label+' ('+(r.opt.p===null?'não se aplica; fora da nota':r.opt.p+'/10')+')',r.q.q,'Resposta: '+r.opt.t,''));
+ lines.push(perfect?'*PRÓXIMOS PASSOS DE VALIDAÇÃO*':'*PRIORIDADES IDENTIFICADAS*');
+ priorities.forEach(item=>lines.push('• '+item.title+': '+item.text));
+ lines.push('','*OBJETIVO DA CONVERSA*',profile.intent,'','Autoavaliação sem auditoria dos canais ou comprovação dos resultados de vendas.','Versão do questionário: 25/09/2026-v3.','','*USO DOS DADOS*',CONSENT_TEXT,'Aviso: '+PRIVACY_VERSION,'Consentimento registrado em: '+consentAt);
+ lastMessage=lines.join('\n');document.getElementById('whatsapp-cta').href='https://wa.me/5547988689351?text='+encodeURIComponent(lastMessage);document.getElementById('copy-status').textContent='';
 }
-
 </script>
 </body>
 </html>
